@@ -15,6 +15,13 @@ You can install the package via composer:
 composer require devraeph/laravel-alh
 ```
 
+You can install the package with:
+```bash
+php artisan alh:install
+```
+
+### OR manually
+
 You can publish and run the migrations with:
 
 ```bash
@@ -32,6 +39,7 @@ This is the contents of the published config file:
 
 ```php
 return [
+//coming soon
 ];
 ```
 
