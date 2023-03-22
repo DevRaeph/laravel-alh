@@ -1,4 +1,20 @@
 <?php
+/*
+*       ____                        __                    _
+*      / __ \  ___  _   __  ___    / /  ____    ____ _   (_)   _  __
+*     / / / / / _ \| | / / / _ \  / /  / __ \  / __ `/  / /   | |/_/
+*    / /_/ / /  __/| |/ / /  __/ / /  / /_/ / / /_/ /  / /   _>  <
+*   /_____/  \___/ |___/  \___/ /_/   \____/  \__, /  /_/   /_/|_|
+*                                         /____/
+*  ___________________________________________________________________
+* | Author:     Develogix Agency e.U. - Raphael Planer
+* | E-Mail:     office@develogix.at
+* | Project:    test-alh
+* | Filename:   create_alh_table.php
+* | Created:    22.03.2023 (21:42:39)
+* | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
+* | Website:    https://develogix.at
+*/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -8,11 +24,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_alh_table', function (Blueprint $table) {
+        Schema::create('alh_logs', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string("type")->default("error");
+            $table->mediumText("message");
+            $table->mediumText("exception")->nullable();
+            $table->string("code")->nullable();
+            $table->string("file_line")->nullable();
+            $table->nullableMorphs("issuer");
             $table->timestamps();
         });
     }

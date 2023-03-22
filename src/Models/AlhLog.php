@@ -10,33 +10,26 @@
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
 * | Project:    test-alh
-* | Filename:   ALHClearOldLogs.php
+* | Filename:   AlhLog.php
 * | Created:    22.03.2023 (21:42:39)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
-namespace DevRaeph\ALH\Commands;
 
-use Carbon\Carbon;
-use DevRaeph\ALH\Models\AlhLog;
-use Illuminate\Console\Command;
+namespace DevRaeph\ALH\Models;
 
-class ALHClearOldLogs extends Command
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
+class AlhLog extends Model
 {
-    public $signature = 'alh:clear-logs';
+    protected $table = "alh_logs";
+    protected $guarded = [];
+    protected $fillable = ["type", "message", "exception", "code", "file_line", "issuer",];
 
-    public $description = 'Clear all old Logs';
-
-    public function handle(): int
+    public function issuer(): MorphTo
     {
-        if(config("alh.logging.to_database") && config("alh.general.clear_logs")){
-            if(AlhLog::count() > 0){
-                AlhLog::whereDate( 'created_at', '<=', now()->subDays(config("alh.general.retention")))->delete();
-            }
-        }
-
-        $this->comment('All done');
-
-        return self::SUCCESS;
+        return $this->morphTo('issuer');
     }
+
 }
