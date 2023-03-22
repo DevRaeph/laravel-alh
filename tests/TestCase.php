@@ -2,9 +2,9 @@
 
 namespace DevRaeph\ALH\Tests;
 
+use DevRaeph\ALH\ALHServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use DevRaeph\ALH\ALHServiceProvider;
 
 class TestCase extends Orchestra
 {

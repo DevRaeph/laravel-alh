@@ -6,6 +6,6 @@ class ALH
 {
     public function test(): void
     {
-        echo "test";
+        echo 'test';
     }
 }
