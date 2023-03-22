@@ -23,13 +23,14 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class AlhLog extends Model
 {
-    protected $table = "alh_logs";
+    protected $table = 'alh_logs';
+
     protected $guarded = [];
-    protected $fillable = ["type", "message", "exception", "code", "file_line", "issuer",];
+
+    protected $fillable = ['type', 'message', 'exception', 'code', 'file_line', 'issuer'];
 
     public function issuer(): MorphTo
     {
         return $this->morphTo('issuer');
     }
-
 }

@@ -15,6 +15,7 @@
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
+
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Commands\ALHClearOldLogs;

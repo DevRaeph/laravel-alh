@@ -15,9 +15,9 @@
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
+
 namespace DevRaeph\ALH\Commands;
 
-use Carbon\Carbon;
 use DevRaeph\ALH\Models\AlhLog;
 use Illuminate\Console\Command;
 
@@ -29,9 +29,9 @@ class ALHClearOldLogs extends Command
 
     public function handle(): int
     {
-        if(config("alh.logging.to_database") && config("alh.general.clear_logs")){
-            if(AlhLog::count() > 0){
-                AlhLog::whereDate( 'created_at', '<=', now()->subDays(config("alh.general.retention")))->delete();
+        if (config('alh.logging.to_database') && config('alh.general.clear_logs')) {
+            if (AlhLog::count() > 0) {
+                AlhLog::whereDate('created_at', '<=', now()->subDays(config('alh.general.retention')))->delete();
             }
         }
 
