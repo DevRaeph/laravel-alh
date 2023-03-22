@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\ServiceProvider;
+
+class ALHMainServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('alh:clear-logs')->everyMinute();
+        });
+    }
+}
