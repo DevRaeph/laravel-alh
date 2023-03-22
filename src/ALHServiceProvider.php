@@ -3,18 +3,12 @@
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Commands\ALHClearOldLogs;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Log;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class ALHServiceProvider extends PackageServiceProvider
 {
-
-
-
-
     public function configurePackage(Package $package): void
     {
         /*
@@ -29,15 +23,14 @@ class ALHServiceProvider extends PackageServiceProvider
             ->hasMigration('create_laravel-alh_table')
             ->hasCommand(ALHClearOldLogs::class)
             ->publishesServiceProvider('ALHMainServiceProvider')
-            ->hasInstallCommand(function (InstallCommand $command){
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
                     ->publishAssets()
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->copyAndRegisterServiceProviderInApp()
-                    ->askToStarRepoOnGitHub("devraeph/laravel-alh");
-            })
-        ;
+                    ->askToStarRepoOnGitHub('devraeph/laravel-alh');
+            });
     }
 }
