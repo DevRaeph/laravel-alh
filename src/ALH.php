@@ -195,7 +195,7 @@ class ALH
         $this->bt_file = (\Str::contains($dbgt[$i]['file'], '/'))
             ? mb_substr($dbgt[$i]['file'], strrpos($dbgt[$i]['file'], '/') + 1)
             : mb_substr($dbgt[$i]['file'], strrpos($dbgt[$i]['file'], '\\') + 1);
-        $this->bt_line = (string)$dbgt[$i]['line'];
+        $this->bt_line = (string) $dbgt[$i]['line'];
         $this->bt_function = $dbgt[$i]['function'];
 
         if ($this->toDB) {

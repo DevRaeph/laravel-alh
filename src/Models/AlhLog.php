@@ -37,13 +37,14 @@ class AlhLog extends Model
         return $this->morphTo('issuer');
     }
 
-    public function getBadgeAttribute(){
+    public function getBadgeAttribute()
+    {
         return match ($this->type) {
-            LogType::ERROR->value => Badge::get_badge(BadgeType::DANGER,\Str::upper($this->type),true),
-            LogType::INFO->value => Badge::get_badge(BadgeType::INDIGO,\Str::upper($this->type),true),
-            LogType::WARNING->value => Badge::get_badge(BadgeType::WARNING,\Str::upper($this->type),true),
-            LogType::SUCCESS->value => Badge::get_badge(BadgeType::SUCCESS,\Str::upper($this->type),true),
-            LogType::PENDING->value => Badge::get_badge(BadgeType::PURPLE,\Str::upper($this->type),true),
+            LogType::ERROR->value => Badge::get_badge(BadgeType::DANGER, \Str::upper($this->type), true),
+            LogType::INFO->value => Badge::get_badge(BadgeType::INDIGO, \Str::upper($this->type), true),
+            LogType::WARNING->value => Badge::get_badge(BadgeType::WARNING, \Str::upper($this->type), true),
+            LogType::SUCCESS->value => Badge::get_badge(BadgeType::SUCCESS, \Str::upper($this->type), true),
+            LogType::PENDING->value => Badge::get_badge(BadgeType::PURPLE, \Str::upper($this->type), true),
         };
     }
 }
