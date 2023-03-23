@@ -17,7 +17,7 @@ class TestCase extends Orchestra
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ALHServiceProvider::class,
@@ -28,9 +28,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-alh_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_alh_table.php.stub';
         $migration->up();
-        */
     }
 }

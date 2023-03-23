@@ -9,7 +9,7 @@
 *  ___________________________________________________________________
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
-* | Project:    test-alh
+* | Project:    Another Logging Helper
 * | Filename:   LogType.php
 * | Created:    22.03.2023 (22:09:24)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
@@ -20,9 +20,9 @@ namespace DevRaeph\ALH\Enums;
 
 enum LogType: string
 {
-    case ERROR = "error";
-    case INFO = "info";
-    case WARNING = "warning";
-    case SUCCESS = "success";
-    case PENDING = "pending";
+    case ERROR = 'error';
+    case INFO = 'info';
+    case WARNING = 'warning';
+    case SUCCESS = 'success';
+    case PENDING = 'pending';
 }

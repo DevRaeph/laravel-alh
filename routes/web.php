@@ -1,3 +1,4 @@
+
 <?php
 /*
 *       ____                        __                    _
@@ -10,25 +11,13 @@
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
 * | Project:    Another Logging Helper
-* | Filename:   ALHMainServiceProvider.php
+* | Filename:   web.php
 * | Created:    22.03.2023 (21:42:39)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
-namespace App\Providers;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\ServiceProvider;
+use DevRaeph\ALH\Http\Controllers\ALHController;
+use Illuminate\Support\Facades\Route;
 
-class ALHMainServiceProvider extends ServiceProvider
-{
-    public function boot()
-    {
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            if(config("alh.general.clear_logs")){
-                $schedule->command('alh:clear-logs')->dailyAt("02:00");
-            }
-        });
-    }
-}
+Route::get('alh-logs', [ALHController::class, 'index'])->name('alh.index');

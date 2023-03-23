@@ -9,12 +9,13 @@
 *  ___________________________________________________________________
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
-* | Project:    test-alh
+* | Project:    Another Logging Helper
 * | Filename:   ALH.php
 * | Created:    22.03.2023 (21:42:39)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
+
 namespace DevRaeph\ALH\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Facade;
  */
 class ALH extends Facade
 {
+    protected static $cached = false;
+
     protected static function getFacadeAccessor()
     {
         return \DevRaeph\ALH\ALH::class;

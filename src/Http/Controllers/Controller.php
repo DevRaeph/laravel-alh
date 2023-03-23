@@ -9,26 +9,21 @@
 *  ___________________________________________________________________
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
-* | Project:    Another Logging Helper
-* | Filename:   ALHMainServiceProvider.php
-* | Created:    22.03.2023 (21:42:39)
+* | Project:    test-alh
+* | Filename:   Controller.php
+* | Created:    23.03.2023 (15:59:48)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
-namespace App\Providers;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\ServiceProvider;
+namespace DevRaeph\ALH\Http\Controllers;
 
-class ALHMainServiceProvider extends ServiceProvider
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
 {
-    public function boot()
-    {
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            if(config("alh.general.clear_logs")){
-                $schedule->command('alh:clear-logs')->dailyAt("02:00");
-            }
-        });
-    }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

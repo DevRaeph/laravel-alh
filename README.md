@@ -5,7 +5,10 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/devraeph/laravel-alh/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devraeph/laravel-alh/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/devraeph/laravel-alh.svg?style=flat-square)](https://packagist.org/packages/devraeph/laravel-alh)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Another small and simple logging package. Mostly I created this for my self and wanted to simplify logging stuff for my ongoing projects.
+
+If anyone can make use of this you're welcome to contribute or open an issue.
+
 
 ## Installation
 
@@ -39,7 +42,19 @@ This is the contents of the published config file:
 
 ```php
 return [
-//coming soon
+    'logging' => [
+        'in_productions' => env("ALH_LOG_IN_PRODUCTION",false),
+        "to_database" => env("ALH_TO_DB",false),
+        "to_file" => env("ALH_TO_FILE",true),
+        "file_driver" => env("ALH_FILE_DRIVER","local"),
+        "file_path" => env("ALH_FILE_PATH","logs_alh"),
+        "separate_by_type" => env("ALH_SEPARATE_BY_TYPE",false),
+    ],
+    'general' => [
+        "clear_logs" => false,
+        'retention' => env("ALH_LOG_RETENTION",7), //Keep Logs for 7 days by default
+    ],
+
 ];
 ```
 
@@ -52,8 +67,33 @@ php artisan vendor:publish --tag="laravel-alh-views"
 ## Usage
 
 ```php
-$aLH = new DevRaeph\ALH();
-echo $aLH->echoPhrase('Hello, DevRaeph!');
+  /*
+   * Uses default mechanism
+   * configured in config/alh.php
+   * default only toFile and not in production
+   */
+   
+   ALH::error("Error message",new Exception("ex"));
+   ALH::warning("Warning message",new Exception("ex"));
+   ALH::info("Info message");
+   ALH::success("Success message");
+   ALH::pending("Pending message");
+
+   /*
+   * Override config settings
+   */
+
+   /* Log Only to DB */
+   ALH::toDB()->error("Error message",new Exception("ex"));
+   /* Log only to File */
+   ALH::toFile()->error("Error message",new Exception("ex"));
+   /* Force Log both */
+   ALH::toDB()->toFile()->error("Error message",new Exception("ex"));
+
+   /*
+   * Option to set Log issuer like User
+   */
+   ALH::setIssuer(User::first())->error("Error message",new Exception("ex"));
 ```
 
 ## Testing

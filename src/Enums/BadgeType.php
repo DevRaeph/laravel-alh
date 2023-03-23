@@ -10,25 +10,22 @@
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
 * | Project:    Another Logging Helper
-* | Filename:   ALHMainServiceProvider.php
+* | Filename:   BadgeType.php
 * | Created:    22.03.2023 (21:42:39)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
-namespace App\Providers;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\ServiceProvider;
+namespace DevRaeph\ALH\Enums;
 
-class ALHMainServiceProvider extends ServiceProvider
+enum BadgeType: int
 {
-    public function boot()
-    {
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            if(config("alh.general.clear_logs")){
-                $schedule->command('alh:clear-logs')->dailyAt("02:00");
-            }
-        });
-    }
+    case PRIMARY = 1;
+    case DARK = 2;
+    case DANGER = 3;
+    case SUCCESS = 4;
+    case WARNING = 5;
+    case INDIGO = 6;
+    case PURPLE = 7;
+    case PINK = 8;
 }

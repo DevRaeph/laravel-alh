@@ -9,12 +9,13 @@
 *  ___________________________________________________________________
 * | Author:     Develogix Agency e.U. - Raphael Planer
 * | E-Mail:     office@develogix.at
-* | Project:    test-alh
+* | Project:    Another Logging Helper
 * | Filename:   ALHServiceProvider.php
 * | Created:    22.03.2023 (21:42:39)
 * | Copyright (C) 2023 Develogix Agency e.U. All Rights Reserved
 * | Website:    https://develogix.at
 */
+
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Commands\ALHClearOldLogs;
@@ -33,6 +34,7 @@ class ALHServiceProvider extends PackageServiceProvider
             ->hasMigration('create_alh_table')
             ->hasCommand(ALHClearOldLogs::class)
             ->publishesServiceProvider('ALHMainServiceProvider')
+            ->hasRoute('web')
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
