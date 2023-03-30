@@ -96,6 +96,21 @@ php artisan vendor:publish --tag="laravel-alh-views"
    ALH::setIssuer(User::first())->error("Error message",new Exception("ex"));
 ```
 
+## Access DB Logs
+### Dashboard at ``/alh-logs``
+### The gate definition is similar to laravel/horizon. You can change the defaults 
+at ``app/Providers/ALHMainServiceProvider.php``
+```php
+protected function gate(): void
+{
+    Gate::define('viewALH', function (User $user) {
+        return in_array($user->email, [
+            //
+        ]);
+    });
+}
+```
+
 ## Testing
 
 ```bash

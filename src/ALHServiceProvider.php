@@ -19,6 +19,7 @@
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Helper\AuthHelper;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,8 +28,17 @@ class ALHServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->authorization();
+        $this->schedule_clear();
     }
 
+    protected function schedule_clear()
+    {
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            if(config("alh.general.clear_logs")){
+                $schedule->command('alh:clear-logs')->dailyAt("02:00");
+            }
+        });
+    }
     protected function authorization()
     {
         $this->gate();

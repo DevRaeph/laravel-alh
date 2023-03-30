@@ -23,29 +23,18 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use App\Models\User;
 
 class ALHMainServiceProvider extends ALHServiceProvider
 {
     public function boot(): void
     {
         parent::boot();
-
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            if(config("alh.general.clear_logs")){
-                $schedule->command('alh:clear-logs')->dailyAt("02:00");
-            }
-        });
-    }
-    protected function authorization()
-    {
-        $this->gate();
-        AuthHelper::auth(function ($request) {
-            return Gate::check('viewALH', [$request->user()]) || app()->environment('local');
-        });
+        //
     }
 
     protected function gate(): void{
-        Gate::define('viewALH', function ($user) {
+        Gate::define('viewALH', function (User $user) {
             return in_array($user->email, [
                 //
             ]);
