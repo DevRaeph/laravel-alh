@@ -25,9 +25,16 @@ class ALHController extends Controller
 {
     public function index(Request $request)
     {
-        $allLogs = AlhLog::paginate(10);
+        $term = null;
+        if(isset($request->search) && ($request->search != "" && $request->search != null)){
+            $term = $request->search;
+            $allLogs = AlhLog::where("message","like","%".$request->search."%")->orderByDesc("id")->paginate(10);
+        }else{
+            $allLogs = AlhLog::orderByDesc("id")->paginate(10);
+        }
 
-        return view('alh::alh.index', ['logs' => $allLogs]);
+
+        return view('alh::alh.index', ['logs' => $allLogs,"term" => $term]);
     }
 
     public function show(Request $request)

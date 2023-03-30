@@ -19,37 +19,32 @@
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Commands\ALHClearOldLogs;
-use DevRaeph\ALH\Helper\AuthHelper;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\ServiceProvider;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-
-class ALHServiceProvider extends ServiceProvider
+class ALHPackageProvider extends PackageServiceProvider
 {
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        $this->authorization();
-
+        $package
+            ->name('alh')
+            ->hasConfigFile()
+            ->hasViews()
+            ->hasMigration('create_alh_table')
+            ->hasCommand(ALHClearOldLogs::class)
+            ->publishesServiceProvider('ALHMainServiceProvider')
+            ->hasRoute('web')
+            ->hasInstallCommand(function (InstallCommand $command) {
+                $command
+                    ->publishConfigFile()
+                    ->publishAssets()
+                    ->publishMigrations()
+                    ->copyAndRegisterServiceProviderInApp()
+                    ->askToRunMigrations()
+                    ->askToStarRepoOnGitHub('devraeph/laravel-alh');
+            });
     }
 
-    protected function authorization()
-    {
-        $this->gate();
-
-        AuthHelper::auth(function ($request) {
-            return Gate::check('viewALH', [$request->user()]) || app()->environment('local');
-        });
-    }
-
-    protected function gate()
-    {
-        Gate::define('viewALH', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
-        });
-    }
 }

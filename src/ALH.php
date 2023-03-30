@@ -24,10 +24,12 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Closure;
 
 class ALH
 {
-    private string $path;
+
+    private ?string $path;
 
     private string $fileName;
 
@@ -56,6 +58,8 @@ class ALH
         $this->path = config('alh.logging.file_path');
         $this->fileName = 'ALH_LOG_'.now()->format('Y-m-d').'.log';
     }
+
+
 
     /**
      * Log only to DataBase
@@ -97,10 +101,8 @@ class ALH
     /**
      * Log error message
      *
-     * @param  string  $message message of the log
-     * @param  \Exception|null  $exception Exception if any exists
-     *
-     * @throws \Exception
+     * @param string $message message of the log
+     * @param \Exception|null $exception Exception if any exists
      */
     public function error(string $message, ?\Exception $exception = null): void
     {
@@ -113,8 +115,6 @@ class ALH
      *
      * @param  string  $message message of the log
      * @param  \Exception|null  $exception Exception if any exits
-     *
-     * @throws \Exception
      */
     public function warning(string $message, ?\Exception $exception = null): void
     {
@@ -124,9 +124,7 @@ class ALH
 
     /**
      * Log success message
-     *
      * @param  string  $message message of the log
-     *
      * @throws \Exception
      */
     public function success(string $message): void
@@ -137,9 +135,7 @@ class ALH
 
     /**
      * Log info message
-     *
      * @param  string  $message message of the log
-     *
      * @throws \Exception
      */
     public function info(string $message): void
@@ -150,9 +146,7 @@ class ALH
 
     /**
      * Log pending message
-     *
      * @param  string  $message message of the log
-     *
      * @throws \Exception
      */
     public function pending(string $message): void
