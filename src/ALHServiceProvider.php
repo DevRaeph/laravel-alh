@@ -34,11 +34,12 @@ class ALHServiceProvider extends ServiceProvider
     protected function schedule_clear()
     {
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
-            if(config("alh.general.clear_logs")){
-                $schedule->command('alh:clear-logs')->dailyAt("02:00");
+            if (config('alh.general.clear_logs')) {
+                $schedule->command('alh:clear-logs')->dailyAt('02:00');
             }
         });
     }
+
     protected function authorization()
     {
         $this->gate();
