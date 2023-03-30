@@ -98,8 +98,8 @@ php artisan vendor:publish --tag="laravel-alh-views"
 
 ## Access DB Logs
 ### Dashboard at ``/alh-logs``
-### The gate definition is similar to laravel/horizon. You can change the defaults 
-at ``app/Providers/ALHMainServiceProvider.php``
+#### The gate definition is similar to ``laravel/horizon``.  
+#### You can change the defaults at ``app/Providers/ALHMainServiceProvider.php``
 ```php
 protected function gate(): void
 {
