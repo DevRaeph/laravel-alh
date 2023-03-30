@@ -18,21 +18,15 @@
 
 namespace DevRaeph\ALH;
 
-use DevRaeph\ALH\Commands\ALHClearOldLogs;
 use DevRaeph\ALH\Helper\AuthHelper;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
-use Spatie\LaravelPackageTools\Package;
-
 
 class ALHServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         $this->authorization();
-
     }
 
     protected function authorization()

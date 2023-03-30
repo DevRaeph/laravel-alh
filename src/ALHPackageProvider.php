@@ -19,7 +19,6 @@
 namespace DevRaeph\ALH;
 
 use DevRaeph\ALH\Commands\ALHClearOldLogs;
-use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -46,5 +45,4 @@ class ALHPackageProvider extends PackageServiceProvider
                     ->askToStarRepoOnGitHub('devraeph/laravel-alh');
             });
     }
-
 }

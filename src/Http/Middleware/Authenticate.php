@@ -36,4 +36,3 @@ class Authenticate
         return AuthHelper::check($request) ? $next($request) : abort(403);
     }
 }
-

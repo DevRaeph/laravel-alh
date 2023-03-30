@@ -40,11 +40,11 @@ class AlhLog extends Model
     public function getBadgeAttribute()
     {
         return match ($this->type) {
-            LogType::ERROR->value => Badge::get_badge(BadgeType::DANGER, \Str::upper($this->type), true,"javascript:void(0)"),
-            LogType::INFO->value => Badge::get_badge(BadgeType::INDIGO, \Str::upper($this->type), true,"javascript:void(0)"),
-            LogType::WARNING->value => Badge::get_badge(BadgeType::WARNING, \Str::upper($this->type), true,"javascript:void(0)"),
-            LogType::SUCCESS->value => Badge::get_badge(BadgeType::SUCCESS, \Str::upper($this->type), true,"javascript:void(0)"),
-            LogType::PENDING->value => Badge::get_badge(BadgeType::PURPLE, \Str::upper($this->type), true,"javascript:void(0)"),
+            LogType::ERROR->value => Badge::get_badge(BadgeType::DANGER, \Str::upper($this->type), true, 'javascript:void(0)'),
+            LogType::INFO->value => Badge::get_badge(BadgeType::INDIGO, \Str::upper($this->type), true, 'javascript:void(0)'),
+            LogType::WARNING->value => Badge::get_badge(BadgeType::WARNING, \Str::upper($this->type), true, 'javascript:void(0)'),
+            LogType::SUCCESS->value => Badge::get_badge(BadgeType::SUCCESS, \Str::upper($this->type), true, 'javascript:void(0)'),
+            LogType::PENDING->value => Badge::get_badge(BadgeType::PURPLE, \Str::upper($this->type), true, 'javascript:void(0)'),
         };
     }
 }
